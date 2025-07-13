@@ -54,4 +54,50 @@ const sr = ScrollReveal({
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200});
+
+const blog = [
+  {
+    img: 'assets/img/CiscoLive.jpg',
+    title: 'Cisco LIVE 2025 In San Diego',
+    desc: 'Attended Cisco LIVE 2025 in San Diego, CA. It was an amazing experience to learn about the latest technologies and network with industry professionals.'
+  },
+  {
+    img: 'assets/img/LMelevate.jpg',
+    title: 'Guest Speaker for LogicMonitor at Elevate Coference 2025',
+    desc: 'Was a guest speaker for LogicMonitor at their Elevate Conference 2025. Discussed the importance of LM Envision and how it can help organizations achieve their IT goals.'
+  },
+  {
+    img: 'assets/img/Quinn.png',
+    title: 'Began Masters in Cybersecurity at Quinnipiac University',
+    desc: 'Fill in info about this'
+  }
+];
+
+let currentProject = 0;
+
+const imgEl = document.querySelector('.carousel__img');
+const titleEl = document.querySelector('.carousel__desc h3');
+const descEl = document.querySelector('.carousel__desc p');
+const leftBtn = document.querySelector('.carousel__arrow--left');
+const rightBtn = document.querySelector('.carousel__arrow--right');
+
+function showProject(index) {
+  imgEl.src = blog[index].img;
+  imgEl.alt = blog[index].title;
+  titleEl.textContent = blog[index].title;
+  descEl.textContent = blog[index].desc;
+}
+
+leftBtn.addEventListener('click', () => {
+  currentProject = (currentProject - 1 + blog.length) % blog.length;
+  showProject(currentProject);
+});
+
+rightBtn.addEventListener('click', () => {
+  currentProject = (currentProject + 1) % blog.length;
+  showProject(currentProject);
+});
+
+// Initialize
+showProject(currentProject);
