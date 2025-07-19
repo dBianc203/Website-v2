@@ -32,12 +32,11 @@ const scrollActive = () =>{
               sectionTop = current.offsetTop - 58,
               sectionId = current.getAttribute('id'),
               sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
-        
         if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
             sectionsClass.classList.add('active-link')
         }else{
             sectionsClass.classList.remove('active-link')
-        }                                                    
+        }
     })
 }
 window.addEventListener('scroll', scrollActive)
@@ -48,12 +47,11 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2000,
     delay: 200,
-//     reset: true
 });
 
-sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
-sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
-sr.reveal('.home__social-icon',{ interval: 200}); 
+sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{});
+sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400});
+sr.reveal('.home__social-icon',{ interval: 200});
 sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200});
 
 const blog = [
@@ -82,21 +80,46 @@ const descEl = document.querySelector('.carousel__desc p');
 const leftBtn = document.querySelector('.carousel__arrow--left');
 const rightBtn = document.querySelector('.carousel__arrow--right');
 
-function showProject(index) {
-  imgEl.src = blog[index].img;
-  imgEl.alt = blog[index].title;
-  titleEl.textContent = blog[index].title;
-  descEl.textContent = blog[index].desc;
+function showProject(index, direction = 'right') {
+  // Remove any previous animation classes
+  imgEl.classList.remove('slide-right', 'slide-in');
+
+  // Animate out
+  if (direction === 'right') {
+    imgEl.classList.add('slide-right');
+  } else {
+    imgEl.classList.add('slide-in');
+  }
+
+  setTimeout(() => {
+    // Change content after slide out
+    imgEl.src = blog[index].img;
+    imgEl.alt = blog[index].title;
+    titleEl.textContent = blog[index].title;
+    descEl.textContent = blog[index].desc;
+
+    // Reset position and animate in
+    imgEl.classList.remove('slide-right', 'slide-in');
+    imgEl.style.transform = direction === 'right' ? 'translateX(-100%)' : 'translateX(100%)';
+    imgEl.style.opacity = '0';
+
+    setTimeout(() => {
+      imgEl.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s';
+      imgEl.style.transform = 'translateX(0)';
+      imgEl.style.opacity = '1';
+    }, 20);
+  }, 500);
 }
 
+// Update event listeners to pass direction
 leftBtn.addEventListener('click', () => {
   currentProject = (currentProject - 1 + blog.length) % blog.length;
-  showProject(currentProject);
+  showProject(currentProject, 'left');
 });
 
 rightBtn.addEventListener('click', () => {
   currentProject = (currentProject + 1) % blog.length;
-  showProject(currentProject);
+  showProject(currentProject, 'right');
 });
 
 // Initialize
