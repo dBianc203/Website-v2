@@ -4,21 +4,17 @@
 :root {
   --header-height: 3rem;
   --font-semi: 600;
-  /*===== Colores =====*/
-  /*Purple 260 - Red 355 - Blue 224 - Pink 340*/
-  /* HSL color mode */
-  /* --hue-color: 224;*/
   --first-color: #7a04eb;
   --second-color: #EFEFEF;
   --background-color: #091833;
   --header-color: #133E7C;
-  /*===== Fuente y tipografia =====*/
+
   --body-font: "Poppins", sans-serif;
   --big-font-size: 2rem;
   --h2-font-size: 1.25rem;
   --normal-font-size: .938rem;
   --smaller-font-size: .75rem;
-  /*===== Margenes =====*/
+
   --mb-2: 1rem;
   --mb-4: 2rem;
   --mb-5: 2.5rem;
@@ -412,6 +408,26 @@ img {
   max-width: 320px;
   min-width: 220px;
   text-align: center;
+}
+
+.carousel__img-wrapper {
+  overflow: hidden;
+  width: 100%; /* or your desired width */
+  height: 100%; /* or your desired height */
+  position: relative;
+}
+
+.carousel__img {
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s;
+  will-change: transform, opacity;
+}
+.carousel__img.slide-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.carousel__img.slide-in {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 
 .carousel__img {
