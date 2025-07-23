@@ -321,12 +321,11 @@ img {
   pointer-events: auto;
 }
 
-/* Hover effect for images in education section */
 .education__img img:hover {
   transform: scale(1.1);
 }
 
-/* ===== WORK =====*/
+/* ===== WORK EXPERIENCE =====*/
 .work__container {
   display: flex;
   flex-direction: column;
@@ -644,7 +643,7 @@ img {
   margin-bottom: var(--mb-4);
 }
 .footer__icon {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
   color: #fff;
   margin: 0 var(--mb-2);
 }
