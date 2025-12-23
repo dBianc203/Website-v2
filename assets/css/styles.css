@@ -411,15 +411,17 @@ img {
 
 .carousel__img-wrapper {
   overflow: hidden;
-  width: 100%; /* or your desired width */
-  height: 100%; /* or your desired height */
+  width: 90%;
+  height: 100%;
   position: relative;
 }
-
+/*
 .carousel__img {
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s;
   will-change: transform, opacity;
 }
+*/
+
 .carousel__img.slide-right {
   transform: translateX(100%);
   opacity: 0;
@@ -446,12 +448,15 @@ img {
 .project__container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 3rem; /* increased gap for more breathing room between items */
+  justify-items: center; /* center items inside each grid cell */
 }
 .project__item {
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  padding: 0.75rem; /* add internal spacing so images don't butt up against each other */
+  box-sizing: border-box;
 }
 .project__img img {
   width: 100%;
