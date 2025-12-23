@@ -1,4 +1,4 @@
-/*===== MENU SHOW =====*/ 
+/*===== MENU SHOW =====*/
 const showMenu = (toggleId, navId) =>{
     const toggle = document.getElementById(toggleId),
     nav = document.getElementById(navId)
@@ -66,9 +66,9 @@ const blog = [
     desc: 'Was a guest speaker for LogicMonitor at their Elevate Conference 2025. Discussed the importance of LM Envision and how it can help organizations achieve their IT goals.'
   },
   {
-    img: 'assets/img/Quinn.png',
-    title: 'Began Masters in Cybersecurity at Quinnipiac University',
-    desc: 'Fill in info about this'
+    img: 'assets/img/CxO.jpg',
+    title: 'Volunteered at CxO Cybersecurity Forum at Quinnipiac University',
+    desc: 'Volunteered as a Student Ambassador at the CxO Cybersecurity Forum at Quinnipiac University. Helped organize events and provided support to attendees.'
   }
 ];
 
@@ -80,7 +80,24 @@ const descEl = document.querySelector('.carousel__desc p');
 const leftBtn = document.querySelector('.carousel__arrow--left');
 const rightBtn = document.querySelector('.carousel__arrow--right');
 
+let firstInit = true;
+
 function showProject(index, direction = 'right') {
+  // On first initialization, populate content immediately without animating the
+  // placeholder out. This avoids a quick flash of the wrong image on page load.
+  if (firstInit) {
+    imgEl.src = blog[index].img;
+    imgEl.alt = blog[index].title;
+    titleEl.textContent = blog[index].title;
+    descEl.textContent = blog[index].desc;
+    // Ensure visible and reset transform
+    imgEl.style.transition = '';
+    imgEl.style.transform = 'translateX(0)';
+    imgEl.style.opacity = '1';
+    firstInit = false;
+    return;
+  }
+
   // Remove any previous animation classes
   imgEl.classList.remove('slide-right', 'slide-in');
 
